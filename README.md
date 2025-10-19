@@ -8,4 +8,4 @@ this is the collection of how to perform scRNAseq analysis, mostly based on `Seu
   
   **02_seu_process.R**: processing with `Seurat` package, including normalization, scaling, variables finding, dimensional reduction, neighbor finding and unsupervised clustering. markers under each resolution also calculated, and heatmap, feature plot and dot plot with user provided markers were allowed. 
   
-  **03_SingleR_anot.R**: automatic annotation with `SingleR` package.
+  **03_SingleR_anot.R**: automatic annotation with `SingleR` package. `cloupe` file also produced with `loupeR` package.

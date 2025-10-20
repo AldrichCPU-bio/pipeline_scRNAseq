@@ -1,10 +1,10 @@
-require("Seurat")
-require("tidyverse")
-require("glue")
-require("SeuratObject")
-require("optparse")
-require("scDblFinder")
-require("scuttle")
+library("Seurat")
+library("tidyverse")
+library("glue")
+library("SeuratObject")
+library("optparse")
+library("scDblFinder")
+library("scuttle")
 
 option_list <- list(
   working_directory = 
@@ -40,6 +40,23 @@ species <- args$species_input
 mt_parten <- args$mitochondrial_pattern
 ribo_parten <- args$ribosome_pattern
 
+## check point: did data directory input exist?
+if (!file.exist(datdir)) {
+  stop(
+    "Data directory not exist. Please check out."
+  )
+}
+if (!file.exist(meta_fn)) {
+  stop(
+    "Meta data/sample info not exist. Please check out."
+  )
+} else if (!grepl(".xlsx$", meta_fn) {
+  stop(
+    "Meta data/sample info file is not a `.xlsx` format. Please check out."
+  )
+}
+
+## check point: is there any defined gene pattern?
 if (species == "human") {
   mt_parten <- "^MT-"
   ribo_parten <- "^RP(L|S)"
@@ -48,9 +65,10 @@ if (species == "human") {
   ribo_parten <- "^Rp(l|s)"
 } else {
   if(any(is.null(mt_parten), is.null(ribo_parten))) {
-    print("species you intend to analyse is, ", species, 
-          ", \nbut mitochondrial or ribosome genes' pattern are blank, \nplease check.")
-    stop()
+    stop(
+      "species you intend to analyse is, ", species, 
+      ", \nbut mitochondrial or ribosome genes' pattern are blank, \nplease check.")
+    )
   }
   print("species you intend to analyse is, ", species, 
         ", \nand mitochondrial & ribosome genes' pattern are prepared. \nGood luck.")
@@ -60,7 +78,6 @@ if (species == "human") {
 wkdir %>% fs::dir_create() %>% setwd()
 sample_info <- readxl::read_excel(meta_fn)
 print(sample_info)
-
 
 ## define my plot theme in ggplot2 ----
 my_theme1 <- 
@@ -84,6 +101,11 @@ dat_fn_tbl <- tibble(
   barcode_fn = barcode_fns[file.exists(barcode_fns)], 
   feat_fn = feat_fns[file.exists(feat_fns)]
 ) %>% dplyr::filter(rowSums(is.na(.)) == 0, rowSums(. == "") == 0)
+
+## check point: is there any matched file path?
+if(nrow(dat_fn_tbl) == 0) {
+  stop("there's no availiable data path, please make sure your data path and sample names exist.")
+}
 
 ## data importing -----
 seu_lst0 <- lapply(dat_fn_tbl$sample_name, \(samp) {
@@ -172,7 +194,7 @@ cel_idx2 <-
 seu_mrg$remain_general <- cel_idx1
 seu_mrg$remain_3mad <- cel_idx2
 
-seu_mrg_qc <- seu_mrg[, seu_mrg$remain_general & seu_mrg$remain_3mad]
+seu_mrg_qc <- seu_mrg[, seu_mrg$remain_general & seu_mrg$remain_3mad] ## a tough threshold
 ## save the objects ------
 rds_dir <- glue("{wkdir}/rds") %>% fs::dir_create()
 write_rds(seu_mrg, glue("{rds_dir}/seu_mrg.rds"), compress = "gz")

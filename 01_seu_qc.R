@@ -175,16 +175,17 @@ mad_threhold_func <- function(x) {
   mad_val <- abs(x - median(x)) %>% median()
   thrd_hi <- median(x) + 3 * mad_val
   thrd_lo <- median(x) - 3 * mad_val
-  return(thrd_hi, thrd_lo)
+  return(c(thrd_hi, thrd_lo))
 }
 mad_call_func <- function(seu_obj = NULL, nm = NULL) {
-  input <- seu_obj@meta.data[[nm]]
+  input <- seu_obj@meta.data[[nm]] %>% as.numeric()
   thrd_vals <- mad_threhold_func(input)
-  print("QC parameter: ", nm, "\n", 
-        "the high threshold is ", thrd_vals[1], "\n", 
-        "low threshold is ", thrd_vals[2])
+  print(paste0("QC parameter: ", nm))
+  print(paste0("the high threshold is ", thrd_vals[1]))
+  print(paste0("low threshold is ", thrd_vals[2]))
   return(thrd_vals)
 }
+
 cel_idx2 <- 
   (seu_mrg$pct_mito < mad_call_func(seu_mrg, "pct_mito")[1]) & 
   (seu_mrg$pct_mito > mad_call_func(seu_mrg, "pct_mito")[2]) & 

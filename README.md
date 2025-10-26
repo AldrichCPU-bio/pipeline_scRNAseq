@@ -13,9 +13,13 @@ this is the collection of how to perform scRNAseq analysis, mostly based on `Seu
 
 ## Individual usage: 
 
+Step1: QC, using `Seurat`
+
 ```{bash}
+
 Rscript 01_seu_qc.R --help
-  Usage: scrna_step1.R [options]
+
+  Usage: 01_seu_qc.R [options]
   
   Options:
           -w WORKINGDIRECTORY, --workingDirectory=WORKINGDIRECTORY
@@ -47,3 +51,98 @@ Rscript 01_seu_qc.R --help
                   Show this help message and exit
 ```
 
+Step2: processing, dimension reducing, graph neighbors finding, unsupervised clustering
+
+```{bash}
+
+Rscript 02_seu_process.R --help
+
+  Usage: 02_seu_process.R [options]
+
+
+  Options:
+          -f RDSPATH, --rdsPath=RDSPATH
+                  Path of seurat object after QC, `rds` format.
+  
+          -w WORKINGDIRECTORY, --workingDirectory=WORKINGDIRECTORY
+                  Set working directory, if it not exist,
+                                     the wkdir would be created at first.
+  
+          -m SAMPLEINFOPATH, --sampleInfoPath=SAMPLEINFOPATH
+                  Set path of excel file, which contains necessary info for each sample.
+  
+   CAUTION 1: it must exist before running this code.
+  
+   CAUTION 2: `sample_names` must exist in column names, describing data file name.
+  
+          -s SPECIESINPUT, --speciesInput=SPECIESINPUT
+                  Which species did the data describe?
+  
+          -p SPLITINPUT, --splitInput=SPLITINPUT
+                  Which component shold the data be split by?
+  This term must be one of the column names in meta data.
+  
+          -i INTEGRATEMETHOD, --integrateMethod=INTEGRATEMETHOD
+                  Which integration method shold be selected?
+  Only could be one of 'harmony', 'rpca' or 'cca'.
+  
+          -g GROUPINPUT, --groupInput=GROUPINPUT
+                  Which component shold be adopted for `group_by` argument?
+  This term must be one of the column names in meta data.
+  
+          -l LABELFEATURECSV, --labelFeatureCSV=LABELFEATURECSV
+                  Which labeling features be adopted for `dotplot` or `featureplot`?
+  
+          --columnForHeatmap=COLUMNFORHEATMAP
+                  Which component shold be adopted for heatmap column?
+  This term must be one of the column names in meta data.
+  
+          -h, --help
+                  Show this help message and exit
+
+
+```
+
+Step3: cell annotation, with automatic method using `SingleR`
+
+```{bash}
+
+Rscript 03_SingleR_anot.R --help
+
+  Usage: 03_SingleR_anot.R [options]
+  
+  
+  Options:
+          -f RDSPATH, --rdsPath=RDSPATH
+                  Path of seurat object after QC, `rds` format.
+  
+          -w WORKINGDIRECTORY, --workingDirectory=WORKINGDIRECTORY
+                  Set working directory, if it not exist,
+                                     the wkdir would be created at first.
+  
+          -m SAMPLEINFOPATH, --sampleInfoPath=SAMPLEINFOPATH
+                  Set path of excel file, which contains necessary info for each sample.
+  
+   CAUTION 1: it must exist before running this code.
+  
+   CAUTION 2: `sample_names` must exist in column names, describing data file name.
+  
+          --refScePath=REFSCEPATH
+                  Path of reference to applied in `SingleR`,
+  
+  which must be `SingleCellExperiment` class and `rds` file format.
+  
+          -c CLUSTERNEEDANNOTAT, --clusterNeedAnnotat=CLUSTERNEEDANNOTAT
+                  Which component shold be adopted for `SingleR` cluster mode?
+  This term must be one of the column names in meta data.
+  
+          -s SPECIESINPUT, --speciesInput=SPECIESINPUT
+                  Which species did the data describe?
+  
+          -l LABELFEATURECSV, --labelFeatureCSV=LABELFEATURECSV
+                  Which labeling features be adopted for `dotplot` or `featureplot`?
+  
+          -h, --help
+                  Show this help message and exit
+
+```

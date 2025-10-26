@@ -28,7 +28,7 @@ option_list <- list(
                           help  = "What the Mito gene's pattern?"), 
   ribosome_pattern = 
     optparse::make_option(c("--ribosomeGenePattern"), type = "character", default = NULL, 
-                          help  = "What the Mito gene's pattern?")
+                          help  = "What the Ribosome gene's pattern?")
 )
 
 args <- parse_args(OptionParser(option_list=option_list))

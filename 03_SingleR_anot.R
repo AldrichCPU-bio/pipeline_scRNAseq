@@ -20,29 +20,29 @@ my_theme1 <-
 ## argments -----
 option_list <- list(
   rdsfn = 
-    optparse::make_option(c("--rdsPath", "-rds_fn"), type = "character", default = NULL, 
+    optparse::make_option(c("--rdsPath", "-f"), type = "character", default = NULL, 
                           help  = "Path of seurat object after QC, `rds` format."), 
   working_directory = 
-    optparse::make_option(c("--workingDirectory", "-wkdir"), type = "character", default = NULL, 
+    optparse::make_option(c("--workingDirectory", "-w"), type = "character", default = NULL, 
                           help  = "Set working directory, if it not exist, 
                                    the wkdir would be created at first."), 
   meta_info_path = 
-    optparse::make_option(c("--sampleInfoPath", "-meta_fn"), type = "character", default = NULL, 
+    optparse::make_option(c("--sampleInfoPath", "-m"), type = "character", default = NULL, 
                           help  = "Set path of excel file, which contains necessary info for each sample.
                                    \n CAUTION 1: it must exist before running this code.
                                    \n CAUTION 2: `sample_names` must exist in column names, describing data file name."), 
   reffn = 
-    optparse::make_option(c("--refScePath", "-ref_fn"), type = "character", default = NULL, 
+    optparse::make_option(c("--refScePath"), type = "character", default = NULL, 
                           help  = "Path of reference to applied in `SingleR`, 
                                    \nwhich must be `SingleCellExperiment` class and `rds` file format."), 
   clst_anot = 
-      optparse::make_option(c("--clusterNeedAnnotat", "-clst_anot"), type = "character", default = "RNA_snn_res.0.2",
+      optparse::make_option(c("--clusterNeedAnnotat", "-c"), type = "character", default = "RNA_snn_res.0.2",
                             help  = "Which component shold be adopted for `SingleR` cluster mode? \nThis term must be one of the column names in meta data."), 
   species_input =
-    optparse::make_option(c("--speciesInput", "-species"), type = "character", default = NULL,
+    optparse::make_option(c("--speciesInput", "-s"), type = "character", default = NULL,
                           help  = "Which species did the data describe?"), 
   label_feat_csv =
-    optparse::make_option(c("--labelFeatureCSV", "-lab_csv"), type = "character", default = NULL,
+    optparse::make_option(c("--labelFeatureCSV", "-l"), type = "character", default = NULL,
                           help  = "Which labeling features be adopted for `dotplot` or `featureplot`?")
 )
 

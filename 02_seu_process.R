@@ -24,34 +24,34 @@ my_theme1 <-
 ## argments -----
 option_list <- list(
   rdsfn = 
-    optparse::make_option(c("--rdsPath", "-rds_fn"), type = "character", default = NULL, 
+    optparse::make_option(c("--rdsPath", "-f"), type = "character", default = NULL, 
                           help  = "Path of seurat object after QC, `rds` format."), 
   working_directory = 
-    optparse::make_option(c("--workingDirectory", "-wkdir"), type = "character", default = NULL, 
+    optparse::make_option(c("--workingDirectory", "-w"), type = "character", default = NULL, 
                           help  = "Set working directory, if it not exist, 
                                    the wkdir would be created at first."), 
   meta_info_path = 
-    optparse::make_option(c("--sampleInfoPath", "-meta_fn"), type = "character", default = NULL, 
+    optparse::make_option(c("--sampleInfoPath", "-m"), type = "character", default = NULL, 
                           help  = "Set path of excel file, which contains necessary info for each sample.
                                    \n CAUTION 1: it must exist before running this code.
                                    \n CAUTION 2: `sample_names` must exist in column names, describing data file name."), 
   species_input = 
-    optparse::make_option(c("--speciesInput", "-species"), type = "character", default = NULL, 
+    optparse::make_option(c("--speciesInput", "-s"), type = "character", default = NULL, 
                           help  = "Which species did the data describe?"), 
   split_input = 
-    optparse::make_option(c("--splitInput", "-split_fct"), type = "character", default = NULL, 
+    optparse::make_option(c("--splitInput", "-p"), type = "character", default = NULL, 
                           help  = "Which component shold the data be split by? \nThis term must be one of the column names in meta data."), 
   integration_method = 
-    optparse::make_option(c("--integrateMethod", "-intg_method"), type = "character", default = NULL, 
+    optparse::make_option(c("--integrateMethod", "-i"), type = "character", default = NULL, 
                           help  = "Which integration method shold be selected? \nOnly could be one of 'harmony', 'rpca' or 'cca'."), 
   group_input = 
-    optparse::make_option(c("--groupInput", "-grp_fct"), type = "character", default = NULL, 
+    optparse::make_option(c("--groupInput", "-g"), type = "character", default = NULL, 
                           help  = "Which component shold be adopted for `group_by` argument? \nThis term must be one of the column names in meta data."), 
   label_feat_csv = 
-    optparse::make_option(c("--labelFeatureCSV", "-lab_csv"), type = "character", default = NULL, 
+    optparse::make_option(c("--labelFeatureCSV", "-l"), type = "character", default = NULL, 
                           help  = "Which labeling features be adopted for `dotplot` or `featureplot`?"), 
   column4htp = 
-    optparse::make_option(c("--columnForHeatmap", "-column4htp"), type = "character", default = "RNA_snn_res.0.2", 
+    optparse::make_option(c("--columnForHeatmap"), type = "character", default = "RNA_snn_res.0.2", 
                           help  = "Which component shold be adopted for heatmap column? \nThis term must be one of the column names in meta data.")
   
 )

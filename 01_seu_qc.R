@@ -8,26 +8,26 @@ library("scuttle")
 
 option_list <- list(
   working_directory = 
-    optparse::make_option(c("--workingDirectory", "-wkdir"), type = "character", default = NULL, 
+    optparse::make_option(c("--workingDirectory", "-w"), type = "character", default = NULL, 
                           help  = "Set working directory, if it not exist, 
                                    the wkdir would be created at first."), 
   data_directory = 
-    optparse::make_option(c("--dataDirectory", "-datdir"), type = "character", default = NULL, 
+    optparse::make_option(c("--dataDirectory", "-d"), type = "character", default = NULL, 
                           help  = "Set data directory, feature names, barcodes & gene matrix would be searched in this path. 
                                    \n CAUTION: it must exist before running this code."), 
   meta_info_path = 
-    optparse::make_option(c("--sampleInfoPath", "-meta_fn"), type = "character", default = NULL, 
+    optparse::make_option(c("--sampleInfoPath", "-m"), type = "character", default = NULL, 
                           help  = "Set path of excel file, which contains necessary info for each sample.
                                    \n CAUTION 1: it must exist before running this code.
                                    \n CAUTION 2: `sample_names` must exist in column names, describing data file name."), 
   species_input = 
-    optparse::make_option(c("--speciesInput", "-species"), type = "character", default = NULL, 
+    optparse::make_option(c("--speciesInput", "-s"), type = "character", default = NULL, 
                           help  = "Which species did the data describe?"), 
   mitochondrial_pattern = 
-    optparse::make_option(c("--mitochondrialGenePattern", "-mt_parten"), type = "character", default = NULL, 
+    optparse::make_option(c("--mitochondrialGenePattern"), type = "character", default = NULL, 
                           help  = "What the Mito gene's pattern?"), 
   ribosome_pattern = 
-    optparse::make_option(c("--ribosomeGenePattern", "-mt_parten"), type = "character", default = NULL, 
+    optparse::make_option(c("--ribosomeGenePattern"), type = "character", default = NULL, 
                           help  = "What the Mito gene's pattern?")
 )
 

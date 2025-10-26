@@ -108,7 +108,7 @@ if(!is.null(intg_method)) {
 }
 
 if(!is.null(split_fct)) {
-  seu_mrg <- Seurat::SplitObject(seu_mrg, split.by = split_fct)
+  seu_mrg[["RNA"]] <- split(seu_mrg[["RNA"]], f = seu_mrg@meta.data[[split_fct]])
   if(is.null(intg_method)) {
     stop("You have confirm the object should be split, but none of the integration methods was set. Please check out.")
   } else {
@@ -205,7 +205,6 @@ htp1 <- ComplexHeatmap::Heatmap(dat_mtx, top_annotation = anot_top1, name = "Z-s
 pdf(glue("seu_mrg_top100_mks_htp_{column4htp}.pdf"), width = 4, height = 4)
 print(htp1)
 dev.off()
-
 
 ## scRNAtoolVis for marker list -----
 mk_vol1 <- markerVocalno(markers = mks4plot,

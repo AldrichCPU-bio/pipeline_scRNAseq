@@ -15,9 +15,9 @@ this is the collection of how to perform scRNAseq analysis, mostly based on `Seu
 
 Step1: QC, using `Seurat`
 
-```{bash}
+`Rscript 01_seu_qc.R --help`
 
-Rscript 01_seu_qc.R --help
+```{bash}
 
   Usage: 01_seu_qc.R [options]
   
@@ -53,9 +53,9 @@ Rscript 01_seu_qc.R --help
 
 Step2: processing, dimension reducing, graph neighbors finding, unsupervised clustering
 
-```{bash}
+`Rscript 02_seu_process.R --help`
 
-Rscript 02_seu_process.R --help
+```{bash}
 
   Usage: 02_seu_process.R [options]
 
@@ -105,9 +105,9 @@ Rscript 02_seu_process.R --help
 
 Step3: cell annotation, with automatic method using `SingleR`
 
-```{bash}
+`Rscript 03_SingleR_anot.R --helpRscript 03_SingleR_anot.R --help`
 
-Rscript 03_SingleR_anot.R --help
+```{bash}
 
   Usage: 03_SingleR_anot.R [options]
   

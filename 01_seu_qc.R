@@ -1,10 +1,10 @@
-library("Seurat")
-library("tidyverse")
-library("glue")
-library("SeuratObject")
-library("optparse")
-library("scDblFinder")
-library("scuttle")
+require("Seurat")
+require("tidyverse")
+require("glue")
+require("SeuratObject")
+require("optparse")
+require("scDblFinder")
+require("scuttle")
 
 option_list <- list(
   working_directory = 
